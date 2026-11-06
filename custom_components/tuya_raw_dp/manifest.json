@@ -1,0 +1,12 @@
+{
+  "domain": "tuya_raw_dp",
+  "name": "Tuya Raw DP",
+  "codeowners": ["@andrea"],
+  "config_flow": true,
+  "documentation": "https://github.com/andreadodo/ha_tuya_raw_dp",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/andreadodo/ha_tuya_raw_dp/issues",
+  "requirements": ["tuya-connector-python==0.1.4"],
+  "version": "0.1.0"
+}

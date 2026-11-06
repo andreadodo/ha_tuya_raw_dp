@@ -1,0 +1,40 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Tuya Raw DP",
+        "description": "Credenziali del tuo Cloud Project su Tuya IoT Platform (iot.tuya.com) e ID del dispositivo di cui vuoi leggere tutti i data point grezzi.",
+        "data": {
+          "client_id": "Access ID / Client ID",
+          "client_secret": "Access Secret / Client Secret",
+          "device_id": "Device ID",
+          "endpoint": "Data Center",
+          "scan_interval": "Intervallo di polling (secondi)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Connessione fallita: verifica credenziali, Device ID e che le API (IoT Core, Authorization) siano abilitate sul progetto."
+    },
+    "abort": {
+      "already_configured": "Questo dispositivo è già configurato."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configura Tuya Raw DP",
+        "data": {
+          "client_id": "Access ID / Client ID",
+          "client_secret": "Access Secret / Client Secret",
+          "device_id": "Device ID",
+          "endpoint": "Data Center",
+          "scan_interval": "Intervallo di polling (secondi)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Connessione fallita: verifica credenziali, Device ID e che le API siano abilitate sul progetto."
+    }
+  }
+}
