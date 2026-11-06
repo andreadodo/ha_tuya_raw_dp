@@ -7,7 +7,13 @@ from typing import Any
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import HomeAssistant
-from homeassistant.data_entry_flow import FlowResult
+
+try:
+    # HA recenti: il tipo di ritorno dei config flow è ConfigFlowResult
+    from homeassistant.config_entries import ConfigFlowResult as FlowResult
+except ImportError:
+    # HA meno recenti: tipo generico in data_entry_flow
+    from homeassistant.data_entry_flow import FlowResult
 
 from tuya_connector import TuyaOpenAPI
 
@@ -47,7 +53,7 @@ class TuyaRawDPConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     @staticmethod
     def async_get_options_flow(config_entry: config_entries.ConfigEntry) -> "TuyaRawDPOptionsFlow":
-        return TuyaRawDPOptionsFlow(config_entry)
+        return TuyaRawDPOptionsFlow()
 
     async def async_step_user(self, user_input: dict[str, Any] | None = None) -> FlowResult:
         errors: dict[str, str] = {}
@@ -103,12 +109,10 @@ class TuyaRawDPOptionsFlow(config_entries.OptionsFlow):
     e intervallo di polling dopo il setup iniziale, da GUI
     (Impostazioni → Dispositivi e servizi → Tuya Raw DP → Configura)."""
 
-    def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
-        self._entry = config_entry
-
     async def async_step_init(self, user_input: dict[str, Any] | None = None) -> FlowResult:
         errors: dict[str, str] = {}
-        current = {**self._entry.data, **self._entry.options}
+        # self.config_entry è iniettato automaticamente dal framework HA
+        current = {**self.config_entry.data, **self.config_entry.options}
 
         # Ricostruisco la label del data center a partire dall'endpoint salvato
         current_endpoint_label = next(
